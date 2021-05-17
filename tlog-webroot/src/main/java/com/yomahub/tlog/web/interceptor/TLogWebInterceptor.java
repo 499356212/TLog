@@ -21,7 +21,7 @@ public class TLogWebInterceptor extends AbsTLogWebHandlerMethodInterceptor {
 
     @Override
     public boolean preHandleByHandlerMethod(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        TLogWebCommon.loadInstance().preHandle(request, response, handler);
+        TLogWebCommon.loadInstance().preHandle(request, response);
         //把traceId放入response的header，为了方便有些人有这样的需求，从前端拿整条链路的traceId
         response.addHeader(TLogConstants.TLOG_TRACE_KEY, TLogContext.getTraceId());
         return true;

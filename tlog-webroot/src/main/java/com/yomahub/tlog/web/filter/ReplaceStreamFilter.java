@@ -1,9 +1,11 @@
 package com.yomahub.tlog.web.filter;
 
+import com.yomahub.tlog.web.common.TLogWebCommon;
 import com.yomahub.tlog.web.wrapper.RequestWrapper;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -27,6 +29,8 @@ public class ReplaceStreamFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+        HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+        TLogWebCommon.loadInstance().preHandle(httpServletRequest, httpServletResponse);
         if (!isFilterExcludeRequest(httpServletRequest)) {
             ServletRequest requestWrapper = new RequestWrapper(httpServletRequest);
             chain.doFilter(requestWrapper, response);
