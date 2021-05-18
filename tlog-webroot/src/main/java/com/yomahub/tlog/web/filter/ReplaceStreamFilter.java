@@ -35,7 +35,7 @@ public class ReplaceStreamFilter implements Filter {
             ServletRequest requestWrapper = new RequestWrapper(httpServletRequest);
             chain.doFilter(requestWrapper, response);
         }
-
+        TLogWebCommon.loadInstance().afterCompletion(httpServletRequest, httpServletResponse);
     }
 
     @Override
